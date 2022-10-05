@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Clarifai from 'clarifai';
+// import Clarifai from 'clarifai';
 import Navigation from './components/Navigation/Navigation';
 import Signin from './components/Signin/Signin';
 import Register from './components/Register/Register';
@@ -9,6 +9,7 @@ import Rank from './components/Rank/Rank';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 
 import './App.css';
+// import { count } from 'console';
 
 // const app = new Clarifai.App({
 //   apiKey: "20f8d819af4a40bf8b4c78573f567ca3"
@@ -27,7 +28,7 @@ class App extends Component {
         id: '',
         name: '',
         email: '',
-        enteries: 0,
+        entries: 0,
         joined: ''
       }
     }
@@ -39,7 +40,7 @@ class App extends Component {
         id: data.id,
         name: data.name,
         email: data.email,
-        enteries: data.enteries,
+        entries: data.entries,
         joined: data.joined
       }
     })
@@ -66,13 +67,28 @@ class App extends Component {
     this.setState({ input: event.target.value })
   }
 
-  onButtonSubmit = () => {
+  onPictureSubmit = () => {
     this.setState({ imageUrl: this.state.input })
     console.log("click")
     // app.models
     //   .predict(
     //     '53e1df302c079b3db8a0a36033ed2d15', this.state.input)
-    //   .then(response => this.displayFaceBox(this.calculateFaceLocation(response)))
+    //   .then(response => {
+    //     if (response) {
+    //       fetch('http://localhost:3000/image', {
+    //         method: 'put',
+    //         headers: { 'Content-Type': 'application/json' },
+    //         body: JSON.stringify({
+    //           id: this.state.user.id
+    //         })
+    //       })
+    //         .then(response => response.json())
+    //         .then(count => {
+    //           this.setState(Object.assign(this.state.user, { entries: count }))
+    //         })
+    //     }
+    //     this.displayFaceBox(this.calculateFaceLocation(response))
+    //   })
     //   .catch(err => console.log(err))
 
   }
@@ -95,8 +111,8 @@ class App extends Component {
             this.state.route === 'home' ?
               <>
                 <Logo />
-                <Rank name={this.state.user.name} enteries={this.state.user.enteries} />
-                <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />
+                <Rank name={this.state.user.name} entries={this.state.user.entries} />
+                <ImageLinkForm onInputChange={this.onInputChange} onPictureSubmit={this.onPictureSubmit} />
                 <FaceRecognition box={box} imageUrl={imageUrl} />
               </>
 
