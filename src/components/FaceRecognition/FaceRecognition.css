@@ -1,8 +1,19 @@
 .bounding-box {
-    position: absolute;
-    box-shadow: 0 0 0 3px #149df2 inset;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    cursor: pointer;
-  }
+  position: absolute;
+  box-shadow: 0 0 0 3px #149df2 inset;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  cursor: pointer;
+
+  /* padding: 0px;
+  margin: 0px;
+  border: 0px;
+  background: transparent;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 1027.41px;
+  height: 581.391px;
+  display: block; */
+}
