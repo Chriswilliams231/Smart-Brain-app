@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ParticlesBg from 'particles-bg';
-import Clarifai from 'clarifai';
+
 import Navigation from './components/Navigation/Navigation';
 import Signin from './components/Signin/Signin';
 import Register from './components/Register/Register';
@@ -14,11 +14,8 @@ import './App.css';
 * Window.process will help connect the Clarifai API to the frontend.
 * This was one way around the error "process not defind" in the console.
 */
-window.process = {};
+// window.process = {};
 
-const app = new Clarifai.App({
-  apiKey: "20f8d819af4a40bf8b4c78573f567ca3"
-});
 
 const initialState = {
   input: '',
@@ -78,12 +75,14 @@ class App extends Component {
   onPictureSubmit = () => {
     this.setState({ imageUrl: this.state.input })
     console.log("click")
-    app.models
-      .predict(
-        // Attention! Sometimes the Clarifai Model can be down or not working as they are constantly getting updated.
-        // If this isn't working, then that means you will have to wait until their servers are back up.
-        Clarifai.FACE_DETECT_MODEL,
-        this.state.input)
+    fetch('http://localhost:3000/imageurl', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        input: this.state.input
+      })
+    })
+      .then(response => response.json())
       .then(response => {
         console.log('working', response)
         if (response) {
