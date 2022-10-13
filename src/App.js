@@ -80,7 +80,10 @@ class App extends Component {
     console.log("click")
     app.models
       .predict(
-        Clarifai.FACE_DETECT_MODEL, this.state.input)
+        // Attention! Sometimes the Clarifai Model can be down or not working as they are constantly getting updated.
+        // If this isn't working, then that means you will have to wait until their servers are back up.
+        Clarifai.FACE_DETECT_MODEL,
+        this.state.input)
       .then(response => {
         console.log('working', response)
         if (response) {
@@ -95,12 +98,11 @@ class App extends Component {
             .then(count => {
               this.setState(Object.assign(this.state.user, { entries: count }))
             })
-            .catch(console.log)
+
         }
         this.displayFaceBox(this.calculateFaceLocation(response))
       })
-      .catch(err => console.log(err))
-
+      .catch(err => console.log("detect system could be down.", err));
   }
 
   onRouteChange = (route) => {
