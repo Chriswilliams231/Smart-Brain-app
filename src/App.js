@@ -84,7 +84,7 @@ class App extends Component {
     })
       .then(response => response.json())
       .then(response => {
-        console.log('working', response)
+        console.log(response)
         if (response) {
           fetch('http://localhost:3000/image', {
             method: 'put',
