@@ -14,7 +14,7 @@ import './App.css';
 * Window.process will help connect the Clarifai API to the frontend.
 * This was one way around the error "process not defind" in the console.
 */
-// window.process = {};
+window.process = {};
 
 
 const initialState = {
